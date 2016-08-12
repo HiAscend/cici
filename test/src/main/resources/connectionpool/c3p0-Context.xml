@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+    <!--PropertyPlaceholderConfigurer用于替换配置元数据，如本示例中将对bean定义中的${…}占位符资源-->
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:connectionpool/c3p0_mysql.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!--懒加载配置-->
+    <bean id="lazyConnectionDataSourceProxyC3p0Mysql"
+          class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource">
+            <bean class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                <property name="driverClass" value="${driverClass}"/>
+                <property name="jdbcUrl" value="${jdbcUrl}"/>
+                <property name="user" value="${user}"/>
+                <property name="password" value="${password}"/>
+                <!--连接池中保留的最小连接数。-->
+                <property name="minPoolSize" value="${minPoolSize}"/>
+                <!--连接池中保留的最大连接数。Default: 15-->
+                <property name="maxPoolSize" value="${maxPoolSize}"/>
+                <!--初始化连接数-->
+                <property name="initialPoolSize" value="${initialPoolSize}"/>
+                <!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0-->
+                <property name="maxIdleTime" value="${maxIdleTime}"/>
+                <!--每60秒检查所有连接池中的空闲连接。Default: 0-->
+                <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}"/>
+                <!--当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException,如设为0则无限期等待。单位毫秒。Default: 0-->
+                <property name="checkoutTimeout" value="${checkoutTimeout}"/>
+
+                <!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements
+                属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。
+                如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0-->
+                <property name="maxStatements" value="${maxStatements}"/>
+                <!--maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
+                <property name="maxStatementsPerConnection" value="${maxStatementsPerConnection}"/>
+
+                <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+                <property name="acquireIncrement" value="${acquireIncrement}"/>
+                <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30-->
+                <property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+                <!--两次连接中间隔时间，单位毫秒。Default: 1000-->
+                <property name="acquireRetryDelay" value="${acquireRetryDelay}"/>
+                <!--连接关闭时默认将所有未提交的操作回滚。Default: false-->
+                <property name="autoCommitOnClose" value="${autoCommitOnClose}"/>
+                <!--c3p0将建一张名为Test的空表，并使用其自带的查询语句进行测试。如果定义了这个参数那么
+                属性preferredTestQuery将被忽略。你不能在这张Test表上进行任何操作，它将只供c3p0测试
+                使用。Default: null-->
+                <property name="automaticTestTable" value="${automaticTestTable}"/>
+                <!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的
+                时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable
+                等方法来提升连接测试的性能。Default: false -->
+                <property name="testConnectionOnCheckout" value="${testConnectionOnCheckout}"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--数据库连接池  dbcp 这种把具体的用户名和配置写入到xml文件中的方式也不是很好，最好是用properties文件 -->
+    <!--<bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/web_bookfood"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <property name="maxActive" value="20"/>
+        <property name="initialSize" value="5"/>
+        <property name="minIdle" value="5"/>
+        <property name="maxIdle" value="20"/>&lt;!&ndash;最好与mazActive一致&ndash;&gt;
+        <property name="maxWait" value="3000"/>
+        &lt;!&ndash;精髓所在&ndash;&gt;
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>&lt;!&ndash;每30秒运行一次&ndash;&gt;
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>&lt;!&ndash;默认值也是30分钟&ndash;&gt;
+        <property name="numTestsPerEvictionRun" value="3"/>
+
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="180"/>
+    </bean>-->
+
+
+</beans>
