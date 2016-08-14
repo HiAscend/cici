@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #333;
+}
+
+.box {
+    width: 800px;
+    height: 280px;
+    margin: 50px auto;
+    position: relative; /*相对定位*/
+}
+
+.box .link {
+    width: 205px;
+    height: 280px;
+    float: left;
+    margin: 0 20px;
+}
+
+.link .icon {
+    display: inline-block;
+    width: 100%;
+    height: 195px;
+    transition: all .2s ease-out; /*all 或者什么都不写表示过渡所有的属性，也可以指定; .2s表示0.2s,也可以表示为200ms*/
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+}
+
+.link-miss .icon {
+    background: url("../image/mission.png") no-repeat center center;
+}
+
+.link-play .icon {
+    background: url("../image/play.png") no-repeat center center;
+}
+
+.link-touch .icon {
+    background: url("../image/touch.png") no-repeat center center;
+}
+
+.link .icon:hover {
+    transform: rotate(360deg) scale(1.2);
+    -ms-transform: rotate(360deg) scale(1.2);
+    -moz-transform: rotate(360deg) scale(1.2);
+    -webkit-transform: rotate(360deg) scale(1.2);
+    -o-transform: rotate(360deg) scale(1.2);
+}
+
+.button {
+    display: block;
+    width: 180px;
+    height: 50px;
+    line-height: 50px;
+    color: #2DCB70;
+    font-family: Arial;
+    font-weight: bolder;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding-left: 20px;
+    margin: 0 auto;
+    position: relative; /*定义子元素相对定位*/
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background:#f00 url("../image/arrow.png") no-repeat 120px center;
+    transition: all .4s ease; /*all 或者什么都不写表示过渡所有的属性，也可以指定; .2s表示0.2s,也可以表示为200ms*/
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+
+.button:hover {
+    border: 2px solid rgba(255, 255, 255, 1);
+    background-position: 130px center;
+}
+
+.button .line {
+    display: block; /*共有属性*/
+    position: absolute;
+    background: none;
+    transition: all .4s ease; /*all 或者什么都不写表示过渡所有的属性，也可以指定; .2s表示0.2s,也可以表示为200ms*/
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+
+.button:hover .line {
+    background: #fff;
+}
+
+.button .line-top {
+    width: 0;
+    height: 2px;
+    left: -110%;
+    top: -2px;
+}
+
+.button:hover .line-top {
+    width: 100%;
+    left: -2px;
+}
+
+.button .line-right {
+    width: 2px;
+    height: 0;
+    right: -2px;
+    top: -110%;
+}
+
+.button:hover .line-right {
+    height: 100%;
+    top: -2px;
+}
+
+.button .line-bottom {
+    width: 0;
+    height: 2px;
+    right: -110%;
+    bottom: -2px;
+}
+
+.button:hover .line-bottom {
+    width: 100%;
+    right: -2px;
+}
+
+.button .line-left {
+    width: 2px;
+    height: 0;
+    left: -2px;
+    bottom: -110%;
+}
+
+.button:hover .line-left {
+    height: 100%;
+    bottom: -2px;
+}
+
+.tip {
+    position: absolute;
+    padding: 0 14px;
+    height:35px;
+    line-height: 35px;
+    background:#2DCB70;
+    color:#fff;
+    font-size: 18px;
+    margin:0 auto;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -o-border-radius:3px;
+    -ms-border-radius:3px;
+    -webkit-border-radius:3px;
+    top:100px;
+    opacity: 1; /*不透明*/
+}
+.tip em{font-style: normal;}
+.tip span{
+    position: absolute;
+    display: block;
+    width:0;
+    height:0;
+    overflow: hidden;
+    border:7px solid transparent;   /*三角形的边长,transparent透明*/
+    border-top-color: #2DCB70;
+    top:35px;
+    left:50%;
+    margin-left: -3px;
+}
+
+
