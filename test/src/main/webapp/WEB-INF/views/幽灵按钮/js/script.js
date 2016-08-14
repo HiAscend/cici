@@ -23,8 +23,12 @@ $(function(){
         console.log('distance'+distance);
         console.log('realLeft'+realLeft);
         console.log('#############');
-        $('.tip').css({'opacity':1,'left':realLeft+'px'});
+        // $('.tip').css({'opacity':1,'left':realLeft+'px'});
+        $('.tip').css({'left':realLeft+'px'}).animate({'top':'140px','opacity':1},500);
     },function () {
-
+       /*if(!$('.tip').is(':animated')){
+           $('.tip').animate({'top':100,'opacity':0},500);
+       }*/
+        $('.tip').stop(true,false).animate({'top':100,'opacity':0},500);
     });
 });

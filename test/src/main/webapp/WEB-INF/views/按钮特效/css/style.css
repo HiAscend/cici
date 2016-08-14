@@ -1,0 +1,45 @@
+input { /*input标签属于行内块元素*/
+    width: 100px;
+    height: 40px;
+    border: none; /*清除系统的边框*/
+    background: url("../image/btn.png");
+}
+
+a {
+    display:inline-block;
+    /*width:100px;*/
+    height:40px;
+    line-height:40px;
+    text-decoration:none;
+    padding-left: 15px;
+    color:#fff;
+    background:url("../image/btn_bg.png");
+}
+a:hover{
+    background-position: 0 -80px;
+}
+a span{
+    display:inline-block;
+    height:40px;
+    padding-right:15px;
+    background:url("../image/btn_bg.png") right -40px;
+}
+a:hover span{
+    background-position: right -120px;
+}
+
+/*css3新增*/
+.css3Btn{
+    display:inline-block;
+    height:40px;
+    box-sizing: border-box;-moz-box-sizing: border-box;-o-box-sizing: border-box;-ms-box-sizing: border-box;-webkit-box-sizing: border-box;
+    line-height:40px;
+    padding:0 15px;
+    color:#fff;
+    border:1px solid #3c81c4;
+    border-radius:5px;
+    background:url("../image/css3_btn_bg.png");
+}
+.css3Btn:hover{
+    background-position: 0 -40px;
+}

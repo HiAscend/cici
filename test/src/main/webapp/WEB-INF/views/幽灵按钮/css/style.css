@@ -157,7 +157,7 @@ body {
     -ms-border-radius:3px;
     -webkit-border-radius:3px;
     top:100px;
-    opacity: 1; /*不透明*/
+    opacity: 0; /*不透明*/
 }
 .tip em{font-style: normal;}
 .tip span{
